@@ -16,6 +16,14 @@ window.addEventListener('load', () => {
       if (errorMessage) errors[e.target.id] = errorMessage
       else delete errors[e.target.id]
     }
+    if(e.target.id === 'rating'){
+      const errorTag = document.querySelector('#ratingError');
+      if(!correctRating(Number(e.target.value))){
+        console.log(!correctRating(Number(e.target.value)));
+        errorTag.style.display = "block";
+        errorTag.innerText = 'El rating tiene que ser menor a 10.';
+    }
+    }
     submitButton.disabled = Object.keys(errors).length > 0
     console.log(errors)
   })
@@ -23,6 +31,16 @@ window.addEventListener('load', () => {
   form.addEventListener('submit', (e) => {
     e.preventDefault()
   })
+
+  // const rating = document.querySelector('#rating');
+  // rating.addEventListener('change', (e) => {
+  //   const errorTag = document.querySelector('#ratingError');
+  //   if(!correctRating(Number(e.target.value))){
+  //     console.log(!correctRating(Number(e.target.value)));
+  //     errorTag.style.display = "block";
+  //     errorTag.innerText += 'El rating tiene que ser menor a 10.';
+  //   }
+  // })
 
 })
 
@@ -42,4 +60,10 @@ const evalNumericalFields = (e) => {
 }
 
 const isNegativeValue = (num) => num < 0
+const correctRating = (num) => num <= 10
+const correctLength = (num) => num <= 240 && num >= 60
 const lengthValidator = (element) => element.value === 0
+
+// campos de titulo, calificacion, premios, fecha de creación y genero.
+//1ro : calificación no sea mayor a 10, puede ser 0.
+//2do : duracion sea mayor a 60 min a 240 min.
